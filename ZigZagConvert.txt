@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        vector<vector<char>> grid(numRows,vector<char>(s.length(),'$'));
+        int row = 0, col = 0, flag = 0;
+        string res="";
+        
+        if(numRows == 1 || numRows == s.length())
+            return s;
+            
+        for(int i=0;i<s.length();i++)
+        {
+            grid[row][col] = s[i];
+            if(row==0)
+                flag = 0;
+            if(row==numRows-1)
+                flag = 1;
+            
+            if(flag){
+                col++;
+                row--;
+            }
+            else
+                row++;
+            
+        }
+        for(int i=0;i<numRows;i++)
+            for(int j=0;j<s.length();j++)
+                if (grid[i][j] != '$')
+                    res += grid[i][j];
+        return res;
+    }
+};
